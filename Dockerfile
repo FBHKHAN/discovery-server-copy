@@ -1,11 +1,4 @@
-FROM maven:3.5-jdk-8
-
-RUN mkdir -p /deploy/application
-
-VOLUME ["/deploy/application"]
-
-WORKDIR /deploy/application
-
-ADD . .
-
-ENTRYPOINT ["mvn","clean","package"]
+FROM openjdk:8
+ADD target/discovery-server.jar discovery-server.jar
+EXPOSE 8761
+ENTRYPOINT ["java", "-jar", "discovery-server.jar"]
